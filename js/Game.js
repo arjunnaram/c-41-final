@@ -44,6 +44,7 @@ class Game {
     form.hide();
     
     Player.getPlayerInfo();
+    player.getCarsAtEnd();
     
     if(allPlayers !== undefined){
       background(rgb(198,135,103));
@@ -63,7 +64,7 @@ class Game {
         index = index + 1 ;
 
         //position the cars a little away from each other in x direction
-        x = x + 200;
+        x = x + 250;
         //use data form the database to display the cars in y direction
         y = displayHeight - allPlayers[plr].distance;
         cars[index-1].x = x;
@@ -91,14 +92,20 @@ class Game {
       player.update();
     }
 
-    if(player.distance > 3860){
+    if(player.distance > 4230){
       gameState = 2;
+      player.rank=player.rank+1
+      Player.updateCarsAtEnd(player.rank)
+
     }
-   
+   ;
+    console.log(player.distance)
     drawSprites();
   }
 
   end(){
     console.log("Game Ended");
+    //display rank in the console
+    console.log(player.name+" rank is "+ player.rank);
   }
 }
